@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
+import { TCreateUser, TUser } from "../repositories/authRepository";
 import { checkLogin, createUser } from "../services/authService";
 
 export async function signup(req: Request, res: Response) {
-    const user = req.body;
+  const { email, password, name }: TCreateUser = req.body;
 
-    await createUser(user);
+  await createUser({ email, password, name });
 
-    res.status(201).send('Usuário cadastrado!')
+  res.status(201).send("Usuário cadastrado!");
 }
 
 export async function login(req: Request, res: Response) {
-    const user = req.body;
+  const user: TUser = req.body;
 
-    const token = await checkLogin(user);
+  const token = await checkLogin(user);
 
-    res.status(200).send(token)
+  res.status(200).send(token);
 }
