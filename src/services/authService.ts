@@ -18,6 +18,22 @@ export async function isUniqueEmail(email: string) {
     }
 }
 
+export async function checkLogin(user: TCreateUser) {
+    const findUser = await findUserByEmail(user.email);
+    
+    if(!findUser) {
+        throw { type: "unauthorized", message: 'Email ou senha inválidos' }
+    }
+
+    const password = bcrypt.compareSync(user.password, findUser.password);
+
+    if(!password) {
+        throw { type: "unauthorized", message: 'Email ou senha inválidos' }
+    }
+    
+    return generateToken(findUser.id);
+}
+
 export function generateToken(id: number) {
     const secret = process.env.TOKEN_SECRET_KEY;
 
