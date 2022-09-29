@@ -2,6 +2,7 @@ import { Users } from "@prisma/client";
 import prisma from "../dbStrategy/prisma";
 
 export type TCreateUser = Omit<Users, 'id'>;
+export type TUser = Omit<Users, 'id' | 'name'>;
 
 export async function findUserByEmail(email: string) {
     return await prisma.users.findFirst({where: { email }});
