@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { findUserByEmail, insertUser, TCreateUser } from '../repositories/authRepository';
+import { findUserByEmail, insertUser, TCreateUser, TUser } from '../repositories/authRepository';
 dotenv.config();
 
 export async function createUser(user: TCreateUser) {
@@ -18,7 +18,7 @@ export async function isUniqueEmail(email: string) {
     }
 }
 
-export async function checkLogin(user: TCreateUser) {
+export async function checkLogin(user: TUser): Promise<string> {
     const findUser = await findUserByEmail(user.email);
     
     if(!findUser) {
@@ -34,7 +34,7 @@ export async function checkLogin(user: TCreateUser) {
     return generateToken(findUser.id);
 }
 
-export function generateToken(id: number) {
+export function generateToken(id: number): string {
     const secret = process.env.TOKEN_SECRET_KEY;
 
     if(!secret) {
