@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser } from "../services/authService";
+import { checkLogin, createUser } from "../services/authService";
 
 export async function signup(req: Request, res: Response) {
     const user = req.body;
@@ -7,4 +7,12 @@ export async function signup(req: Request, res: Response) {
     await createUser(user);
 
     res.status(201).send('Usuário cadastrado!')
+}
+
+export async function login(req: Request, res: Response) {
+    const user = req.body;
+
+    const token = await checkLogin(user);
+
+    res.status(200).send(token)
 }
