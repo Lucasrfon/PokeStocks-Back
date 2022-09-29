@@ -8,4 +8,9 @@ const newUserSchema = joi.object({
     confirmPassword: joi.string().required().valid(joi.ref('password'))
 });
 
-export default newUserSchema
+const loginSchema = joi.object({
+    email: joi.string().email().required(),
+    password: joi.string().length(8).required()
+});
+
+export { newUserSchema, loginSchema }
