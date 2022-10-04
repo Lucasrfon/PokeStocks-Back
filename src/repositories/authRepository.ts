@@ -1,13 +1,13 @@
-import { Users } from "@prisma/client";
+import { User } from "@prisma/client";
 import prisma from "../dbStrategy/prisma";
 
-export type TCreateUser = Omit<Users, 'id'>;
-export type TUser = Omit<Users, 'id' | 'name'>;
+export type TCreateUser = Omit<User, "id" | "credit">;
+export type TUser = Omit<User, "id" | "name" | "credit">;
 
 export async function findUserByEmail(email: string) {
-    return await prisma.users.findFirst({where: { email }});
+  return await prisma.user.findFirst({ where: { email } });
 }
 
 export async function insertUser(user: TCreateUser) {
-    await prisma.users.create({data: user});
+  await prisma.user.create({ data: user });
 }
