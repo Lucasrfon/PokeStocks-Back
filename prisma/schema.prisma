@@ -18,7 +18,7 @@ model Users {
   credit   Int    @default(100)
 }
 
-model Pokemons {
+model Pokemon {
   id    Int    @id @default(autoincrement())
   name  String @unique
   pic   String @unique
@@ -28,4 +28,6 @@ model Pokemons {
   atk   Int
   def   Int
   spd   Int
+
+  @@map("pokemons")
 }
