@@ -472,7 +472,7 @@ const pokeTypes = [
   { id: 119, type1: "water", type2: "" },
   { id: 120, type1: "water", type2: "" },
   { id: 121, type1: "water", type2: "" },
-  { id: 122, type1: "psychic", type2: "fairy" },
+  { id: 122, type1: "psychic", type2: "" },
   { id: 123, type1: "bug", type2: "flying" },
   { id: 124, type1: "ice", type2: "psychic" },
   { id: 125, type1: "electric", type2: "" },
@@ -543,7 +543,7 @@ const marketMaxAmount = [
   50, 40, 0, 300, 80, 80, 80, 80, 60, 20, 60, 20, 40, 40, 2, 2, 2, 8, 3, 1, 1,
   1,
 ];
-const marketData: Market[] = []
+const marketData: Market[] = [];
 
 function concatenatePokeData() {
   for (let i = 0; i < pokeNames.length; i++) {
