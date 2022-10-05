@@ -53,4 +53,6 @@ model Wallet {
   user      User    @relation(fields: [userId], references: [id])
   userId    Int
   amount    Int
+
+  @@map("wallet")
 }
