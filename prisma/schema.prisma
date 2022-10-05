@@ -25,7 +25,7 @@ model Pokemon {
   name  String @unique
   pic   String @unique
   type1 String
-  type2 String
+  type2 String?
   hp    Int
   atk   Int
   def   Int
