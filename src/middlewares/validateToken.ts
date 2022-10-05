@@ -10,15 +10,15 @@ export default function validateToken() {
     const secret = process.env.TOKEN_SECRET_KEY;
 
     if (!token) {
-      throw { type: "unauthorized"};
+      throw { type: "unauthorized" };
     }
 
     if (!authorization?.startsWith("Bearer ")) {
-      throw { type: "unauthorized"};
+      throw { type: "unauthorized" };
     }
 
     if (!secret) {
-      throw { type: "code"};
+      throw { type: "code" };
     }
 
     jwt.verify(token, secret);
