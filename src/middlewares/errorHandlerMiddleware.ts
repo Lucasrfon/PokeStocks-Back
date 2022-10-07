@@ -14,6 +14,10 @@ export default async function errorHandlerMiddleware(
     return res.status(404).send("Não encontrado");
   }
 
+  if (error.type === "transaction denied" || error.name) {
+    return res.status(406).send(error.message);
+  }
+
   if (error.type === "conflict") {
     return res.status(409).send(error.message);
   }
