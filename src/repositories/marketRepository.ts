@@ -11,8 +11,8 @@ export async function getStockMarketById(pokemonId: number) {
   return await prisma.market.findUnique({ where: { pokemonId } });
 }
 
-export async function getUserWallet(id: number) {
-  return await prisma.wallet.findUnique({ where: { id } });
+export async function getUserWallet(pokemonId: number, userId: number) {
+  return await prisma.wallet.findUnique({ where: { pokemonId_userId: { userId, pokemonId } } });
 }
 
 export async function updateWallet(order: TMarket, userId: number) {
