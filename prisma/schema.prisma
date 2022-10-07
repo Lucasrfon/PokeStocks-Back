@@ -55,4 +55,5 @@ model Wallet {
   amount    Int
 
   @@map("wallet")
+  @@unique([pokemonId, userId])
 }
