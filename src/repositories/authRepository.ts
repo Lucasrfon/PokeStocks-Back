@@ -15,3 +15,7 @@ export async function findUserById(id: number) {
 export async function insertUser(user: TCreateUser) {
   await prisma.user.create({ data: user });
 }
+
+export async function updateCredits(id: number, credit: number) {
+  await prisma.user.update({ where: { id }, data: { credit } });
+}
