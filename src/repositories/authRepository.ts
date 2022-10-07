@@ -17,5 +17,5 @@ export async function insertUser(user: TCreateUser) {
 }
 
 export async function updateCredits(id: number, credit: number) {
-  await prisma.user.update({ where: { id }, data: { credit } });
+  await prisma.user.update({ where: { id }, data: { credit: { increment: credit } } });
 }
