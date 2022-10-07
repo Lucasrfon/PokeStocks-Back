@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Market } from "@prisma/client";
+import { TMarket } from "../repositories/marketRepository";
 
 export async function requestMarket(req: Request, res: Response) {
   const marketData = await getMarketData();
@@ -8,7 +8,7 @@ export async function requestMarket(req: Request, res: Response) {
 }
 
 export async function requestBuyStocks(req: Request, res: Response) {
-  const buyOrder: Market = req.body;
+  const buyOrder: TMarket = req.body;
 
   await buyStocks(buyOrder);
 
@@ -16,7 +16,7 @@ export async function requestBuyStocks(req: Request, res: Response) {
 }
 
 export async function requestSellStocks(req: Request, res: Response) {
-  const sellOrder: Market = req.body;
+  const sellOrder: TMarket = req.body;
 
   await sellStocks(sellOrder);
 
