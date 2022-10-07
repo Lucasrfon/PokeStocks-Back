@@ -14,3 +14,11 @@ export async function getStockMarketById(pokemonId: number) {
 export async function getUserWallet(id: number) {
   return await prisma.wallet.findUnique({ where: { id } });
 }
+
+export async function updateWallet(order: TMarket, userId: number) {
+  await prisma.wallet.upsert({
+    where: { pokemonId_userId: { userId, pokemonId: order.pokemonId } },
+    create: { userId, pokemonId: order.pokemonId, amount: order.amount },
+    update: { amount: { increment: order.amount } },
+  });
+}
