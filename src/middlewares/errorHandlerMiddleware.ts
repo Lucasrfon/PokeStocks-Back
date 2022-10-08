@@ -10,11 +10,15 @@ export default async function errorHandlerMiddleware(
     return res.status(401).send("Token inválido");
   }
 
-  if (error.type === "not found" || error.name) {
+  if (error.type === "authentication") {
+    return res.status(401).send("Email ou senha inválidos");
+  }
+
+  if (error.type === "not found") {
     return res.status(404).send("Não encontrado");
   }
 
-  if (error.type === "transaction denied" || error.name) {
+  if (error.type === "transaction denied") {
     return res.status(406).send(error.message);
   }
 
