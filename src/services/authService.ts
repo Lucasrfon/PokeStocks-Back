@@ -27,13 +27,13 @@ export async function checkLogin(user: TUser): Promise<string> {
   const findUser = await findUserByEmail(user.email);
 
   if (!findUser) {
-    throw { type: "unauthorized", message: "Email ou senha inválidos" };
+    throw { type: "authentication" };
   }
 
   const password = bcrypt.compareSync(user.password, findUser.password);
 
   if (!password) {
-    throw { type: "unauthorized", message: "Email ou senha inválidos" };
+    throw { type: "authentication" };
   }
 
   return generateToken(findUser.id);
