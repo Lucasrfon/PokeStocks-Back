@@ -1,12 +1,17 @@
-export async function getProfile(id: number) {
-  const profile = await findProfile(id);
+import { findUserById } from "../repositories/authRepository";
+import { findAlbum } from "../repositories/statisticsRepository";
 
-  if(!profile) {
-    throw { type: "not found" }
+export async function getProfile(id: number) {
+  const profile = await findUserById(id);
+
+  if (!profile) {
+    throw { type: "not found" };
   }
-  return profile
+
+  return { name: profile.name, credit: profile.credit };
 }
 
 export async function getAlbum(id: number) {
-    return await findAlbum(id);
-  }
+  const album = await findAlbum(id);
+  return album.map((each) => each.pokemonId);
+}
