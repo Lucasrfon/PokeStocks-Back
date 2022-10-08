@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { getAlbum, getProfile } from "../services/statisticsService";
 
 export async function requestProfile(req: Request, res: Response) {
   const id = parseInt(res.locals.id);
@@ -9,7 +10,6 @@ export async function requestProfile(req: Request, res: Response) {
 
 export async function requestAlbum(req: Request, res: Response) {
   const id = parseInt(res.locals.id);
-
   const album = await getAlbum(id);
 
   res.status(200).send(album);
