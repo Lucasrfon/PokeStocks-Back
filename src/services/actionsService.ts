@@ -18,12 +18,11 @@ export async function checkApplication(
 ) {
   const userWallet = await getUserWallet(pokemonId, id);
   const pokemon = await findPokemonById(pokemonId);
+  const job = await findJobById(jobId);
 
-  if (!userWallet || userWallet.amount === 0 || !pokemon) {
+  if (!userWallet || userWallet.amount === 0 || !pokemon || !job) {
     throw { type: "not found" };
   }
-
-  const job = await findJobById(jobId);
 
   if (job.type !== pokemon.type1 && job.type !== pokemon.type2) {
     throw { type: "type conflict" };

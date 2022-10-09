@@ -4,10 +4,10 @@ export async function findJobs() {
   return await prisma.job.findMany();
 }
 
-export async function findJobById(jobId: number) {
-  return await prisma.job.findUnique({ where: { jobId } });
+export async function findJobById(id: number) {
+  return await prisma.job.findUnique({ where: { id } });
 }
 
-export async function findPokemonById(pokemonId: number) {
-  return await prisma.pokemon.findUnique({ where: { id: pokemonId } });
+export async function findPokemonById(id: number) {
+  return await prisma.pokemon.findUnique({ where: { id } });
 }

@@ -545,6 +545,23 @@ const marketMaxAmount = [
 ];
 const marketData: Market[] = [];
 
+const jobs = [
+ {type: "dragon"},
+ {type: "ghost"},
+ {type: "normal"},
+ {type: "poison"},
+ {type: "grass"},
+ {type: "psychic"},
+ {type: "fighting"},
+ {type: "electric"},
+ {type: "ice"},
+ {type: "fire"},
+ {type: "bug"},
+ {type: "ground"},
+ {type: "rock"},
+ {type: "water"}
+];
+
 function concatenatePokeData() {
   for (let i = 0; i < pokeNames.length; i++) {
     pokeData.push({
@@ -580,6 +597,10 @@ export async function main() {
   });
   await prisma.market.createMany({
     data: concatenateMarketData(),
+    skipDuplicates: true,
+  });
+  await prisma.job.createMany({
+    data: jobs,
     skipDuplicates: true,
   });
 }
