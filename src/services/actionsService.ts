@@ -1,3 +1,4 @@
+import { findJobById, findJobs, findPokemonById } from "../repositories/actionsRepository";
 import { getUserWallet } from "../repositories/marketRepository";
 
 export async function getJobs() {
@@ -16,15 +17,15 @@ export async function checkApplication(
   jobId: number
 ) {
   const userWallet = await getUserWallet(pokemonId, id);
+  const pokemon = await findPokemonById(pokemonId);
 
-  if (!userWallet || userWallet.amount === 0) {
+  if (!userWallet || userWallet.amount === 0 || !pokemon) {
     throw { type: "not found" };
   }
 
   const job = await findJobById(jobId);
-  const pokemon = await findPokemonById(pokemonId);
 
-  if (job.type !== pokemon.type && job.type !== pokemon.type2) {
+  if (job.type !== pokemon.type1 && job.type !== pokemon.type2) {
     throw { type: "type conflict" };
   }
 }
