@@ -14,6 +14,10 @@ export default async function errorHandlerMiddleware(
     return res.status(401).send("Email ou senha inválidos");
   }
 
+  if (error.type === "type conflict") {
+    return res.status(403).send("Tipo incompatível");
+  }
+
   if (error.type === "not found") {
     return res.status(404).send("Não encontrado");
   }
