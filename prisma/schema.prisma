@@ -54,6 +54,13 @@ model Wallet {
   userId    Int
   amount    Int
 
-  @@map("wallet")
   @@unique([pokemonId, userId])
+  @@map("wallet")
+}
+
+model Job {
+  id    Int    @id @default(autoincrement())
+  type  String
+
+  @@map("jobs")
 }
