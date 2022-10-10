@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
   password String
   name     String
-  credit   Int      @default(100)
+  credit   Int       @default(100)
   wallet   Wallet[]
+  jobUser  JobUser[]
 
   @@map("users")
 }
@@ -59,8 +60,20 @@ model Wallet {
 }
 
 model Job {
-  id    Int    @id @default(autoincrement())
-  type  String
+  id      Int       @id @default(autoincrement())
+  type    String
+  jobUser JobUser[]
 
   @@map("jobs")
+}
+
+model JobUser {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  job    Job  @relation(fields: [jobId], references: [id])
+  jobId  Int
+
+  @@unique([jobId, userId])
+  @@map("jobUser")
 }
