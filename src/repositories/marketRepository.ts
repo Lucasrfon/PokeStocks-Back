@@ -4,7 +4,16 @@ import { Market } from "@prisma/client";
 export type TMarket = Omit<Market, "value">;
 
 export async function getStockMarket() {
-  return await prisma.market.findMany();
+  return await prisma.market.findMany({
+    include: {
+      pokemon: {
+        select: {
+          name: true,
+          pic: true
+        }
+      }
+    }
+  });
 }
 
 export async function getStockMarketById(pokemonId: number) {
